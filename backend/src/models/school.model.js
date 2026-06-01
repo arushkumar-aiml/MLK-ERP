@@ -41,6 +41,39 @@ const addressSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const logoSchema = new mongoose.Schema(
+  {
+    url: {
+      type: String,
+      trim: true,
+      maxlength: [300, 'Logo URL cannot exceed 300 characters'],
+    },
+    storageKey: {
+      type: String,
+      trim: true,
+      maxlength: [180, 'Logo storage key cannot exceed 180 characters'],
+    },
+    mimeType: {
+      type: String,
+      trim: true,
+      enum: ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'],
+    },
+    size: {
+      type: Number,
+      min: [1, 'Logo size must be greater than 0'],
+      max: [5242880, 'Logo size cannot exceed 5 MB'],
+    },
+    uploadedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    uploadedAt: {
+      type: Date,
+    },
+  },
+  { _id: false }
+);
+
 const schoolSchema = new mongoose.Schema(
   {
     name: {
@@ -87,6 +120,21 @@ const schoolSchema = new mongoose.Schema(
       default: 'active',
       index: true,
     },
+    principal: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      index: true,
+    },
+    admins: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
+      default: [],
+    },
+    logo: logoSchema,
     settings: {
       timezone: {
         type: String,
@@ -108,5 +156,6 @@ const schoolSchema = new mongoose.Schema(
 
 schoolSchema.index({ email: 1 }, { unique: true, sparse: true });
 schoolSchema.index({ status: 1, name: 1 });
+schoolSchema.index({ admins: 1 });
 
 module.exports = mongoose.model('School', schoolSchema);

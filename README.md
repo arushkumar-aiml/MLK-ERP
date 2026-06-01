@@ -153,7 +153,20 @@ POST /api/schools
 GET /api/schools/:id
 PUT /api/schools/:id
 DELETE /api/schools/:id
+PATCH /api/schools/:id/status
+POST /api/schools/:id/assign-principal
+POST /api/schools/:id/assign-admin
+GET /api/schools/:id/analytics
 ```
+
+Access rules:
+
+- Super Admin: full school management.
+- Admin: view assigned school.
+- Principal: view assigned school.
+- Teacher and Student/Parent equivalent accounts: no school management access.
+
+School APIs include search, status filters, duplicate school prevention, email/phone validation, principal/admin assignment validation, status activation/deactivation, logo metadata storage, analytics, and audit logging.
 
 School API details are available in `docs/phase-4-school-management.md`.
 

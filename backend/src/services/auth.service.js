@@ -10,8 +10,8 @@ const MAX_REFRESH_TOKENS_PER_USER = 5;
 
 const ROLE_PERMISSIONS = {
   superadmin: ['auth:read', 'auth:write', 'users:read', 'users:write', 'schools:read', 'schools:write'],
-  admin: ['auth:read', 'auth:write', 'users:read', 'users:write'],
-  principal: ['auth:read', 'users:read'],
+  admin: ['auth:read', 'auth:write', 'users:read', 'users:write', 'schools:read'],
+  principal: ['auth:read', 'users:read', 'schools:read'],
   teacher: ['auth:read'],
   student: ['auth:read'],
 };

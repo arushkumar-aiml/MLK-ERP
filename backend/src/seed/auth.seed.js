@@ -9,10 +9,31 @@ const DEFAULT_PASSWORD = process.env.SEED_DEFAULT_PASSWORD || 'MLK@123456';
 
 const sampleSchools = [
   {
-    name: 'AVM Public School',
+    name: 'Adarsh Vidya Mandir Pre School',
     code: 'AVMP',
     email: 'office@avmp.example.com',
     phone: '+91 98765 43001',
+    academicYear: '2026-2027',
+  },
+  {
+    name: 'Adarsh Vidya Mandir',
+    code: 'AVM',
+    email: 'office@avm.example.com',
+    phone: '+91 98765 43005',
+    academicYear: '2026-2027',
+  },
+  {
+    name: 'Ram Manohar Lohia Sarvottam Vidyalaya',
+    code: 'RMLSV',
+    email: 'office@rmlsv.example.com',
+    phone: '+91 98765 43006',
+    academicYear: '2026-2027',
+  },
+  {
+    name: 'MSA World',
+    code: 'MSA',
+    email: 'office@msa.example.com',
+    phone: '+91 98765 43007',
     academicYear: '2026-2027',
   },
 ];
