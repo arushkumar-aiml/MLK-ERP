@@ -20,6 +20,106 @@ const classTeacherSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const attendanceSummarySchema = new mongoose.Schema(
+  {
+    present: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    absent: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    leave: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+  },
+  { _id: false }
+);
+
+const performanceSchema = new mongoose.Schema(
+  {
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+    },
+    notes: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Performance notes cannot exceed 500 characters'],
+    },
+    reviewedAt: {
+      type: Date,
+    },
+  },
+  { _id: false }
+);
+
+const salaryRecordSchema = new mongoose.Schema(
+  {
+    month: {
+      type: String,
+      required: [true, 'Salary month is required'],
+      match: [/^\d{4}-\d{2}$/, 'Salary month must use YYYY-MM format'],
+    },
+    amount: {
+      type: Number,
+      required: [true, 'Salary amount is required'],
+      min: [0, 'Salary amount cannot be negative'],
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'paid'],
+      default: 'pending',
+    },
+    paidAt: {
+      type: Date,
+    },
+  },
+  { _id: true }
+);
+
+const timetableAssignmentSchema = new mongoose.Schema(
+  {
+    day: {
+      type: String,
+      enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+      required: [true, 'Timetable day is required'],
+    },
+    className: {
+      type: String,
+      required: [true, 'Timetable class is required'],
+      trim: true,
+      maxlength: [40, 'Timetable class cannot exceed 40 characters'],
+    },
+    section: {
+      type: String,
+      trim: true,
+      uppercase: true,
+      maxlength: [10, 'Timetable section cannot exceed 10 characters'],
+      default: 'A',
+    },
+    subject: {
+      type: String,
+      required: [true, 'Timetable subject is required'],
+      trim: true,
+      maxlength: [60, 'Timetable subject cannot exceed 60 characters'],
+    },
+    period: {
+      type: Number,
+      required: [true, 'Timetable period is required'],
+      min: 1,
+      max: 12,
+    },
+  },
+  { _id: true }
+);
+
 const teacherSchema = new mongoose.Schema(
   {
     school: {
@@ -86,6 +186,23 @@ const teacherSchema = new mongoose.Schema(
       },
     },
     classTeacherOf: classTeacherSchema,
+    assignedClasses: {
+      type: [classTeacherSchema],
+      default: [],
+    },
+    attendanceSummary: {
+      type: attendanceSummarySchema,
+      default: () => ({}),
+    },
+    performance: performanceSchema,
+    salaryRecords: {
+      type: [salaryRecordSchema],
+      default: [],
+    },
+    timetable: {
+      type: [timetableAssignmentSchema],
+      default: [],
+    },
     employmentType: {
       type: String,
       enum: ['full_time', 'part_time', 'contract'],
