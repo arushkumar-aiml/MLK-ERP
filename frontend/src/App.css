@@ -1,0 +1,144 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  background: #f7f4ee;
+  color: #263238;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #ded8ce;
+  background: #fffdf8;
+}
+
+.sidebar h1 {
+  margin: 8px 0 0;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 10px;
+}
+
+.sidebar a {
+  color: #47545c;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+main {
+  padding: 32px;
+}
+
+.hero-panel,
+.section {
+  max-width: 1120px;
+}
+
+.hero-panel {
+  min-height: 320px;
+  padding: 48px;
+  display: grid;
+  align-content: end;
+  border: 1px solid #d8cfc0;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.96), rgba(255, 253, 248, 0.72)),
+    #e6d7bf;
+}
+
+.hero-panel h2,
+.section h2 {
+  margin: 8px 0 12px;
+  color: #1d2b2f;
+  font-size: 38px;
+  line-height: 1.08;
+}
+
+.hero-panel p,
+.section p,
+.module-card p {
+  max-width: 700px;
+  color: #5b666b;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #8a4b27;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.section {
+  margin-top: 32px;
+}
+
+.section-header {
+  margin-bottom: 18px;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.module-card {
+  min-height: 150px;
+  padding: 22px;
+  border: 1px solid #ded8ce;
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.module-card h3 {
+  margin: 0 0 10px;
+  color: #1d2b2f;
+  font-size: 20px;
+}
+
+.phase-strip {
+  padding: 28px;
+  border-left: 4px solid #2f6f6d;
+  background: #edf5f3;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    gap: 24px;
+  }
+
+  .sidebar nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  .hero-panel {
+    min-height: 260px;
+    padding: 28px;
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
+}
